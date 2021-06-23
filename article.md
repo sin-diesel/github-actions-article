@@ -14,9 +14,21 @@ Even if you are experienced git user who knows tons of git workflows and best pr
 Basically **GitHub actions** is a feature which allows to configure your GH repository to automatically do some stuff depending on how you configure it. You write a few configuration files with commands specifying the settings for a remote machine that will run your application. You can also tell github to automatically do launch some stuff on a remote machine whenever some event happens, for instance, imagine you have some tests in your repository and you want every commit from your collaborators to pass the tests. You can tell github to run those tests whenever someone pushes to the repository.
 
 By navigation to `actions` tab in your github repository you will see the following:
+
+
+
 ![actions-tab](images/1.png)
 
+We will now move on to writing your own workflow.
+
 ## How to implement your own workflow
+
+A workflow in github actions is basically a list of commands that you write to set up the remote machine on github to run in the way you want to. 
+
+
+1) First, we create a `.github/workflows` directory in our git repository. You can do it in github or in your local repository, and then push it to remote github repo.
+2) Then we need to create `.yml` file in `.github/workflows`. This will contain all of the commands we are going to write. You can name it whatever you like, on our case, this will simply be `main.yml`
+3)
 
 Unfortunately, after completing first tutorials one might not get the idea on how to put the gained knowledge into practice. If you have trouble figuring it out, then the next section is exactly what you need.
 
