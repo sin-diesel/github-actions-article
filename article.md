@@ -133,6 +133,35 @@ jobs:
 
 * We used action `actions/checkout@v1` in order *to clone our repository's files to the remote machine.* Now let's run our action again and see the result.
 
+![run-success](images/3.png)
+
+Now our action successfully runs the test script! Let's make the test fail, for example.
+
+`test_sum.py`
+
+```python
+
+def test_sum():
+    input = [1, 2, 3]
+    output = 6
+    assert(sum(input) != output) # now this will fail
+
+test_sum()
+
+```
+
+Commit the changes and see the result:
+
+![run-failed-again](images/4.png)
+
+## Where to look for references
+
+Now that you have learned the basics of github actions, you can continue to dig deeper into the topic. Several resources will definitely help you with that:
+* [This is a link](https://lab.github.com/githubtraining/github-actions:-hello-world) to github hosted course that covers many aspects of github actions, containers and other stuff.
+*
+*
+*
+
 
 
 
