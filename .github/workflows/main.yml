@@ -6,9 +6,14 @@ jobs:
     name: Unit tests
     runs-on: macos-latest
     steps:
+      
       - name: setup python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+
+      - name: clone repository's files
+        uses: actions/checkout@v1
+
       - name: execute python script
         run: python test_sum.py

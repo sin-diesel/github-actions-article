@@ -100,6 +100,42 @@ jobs:
 Now lets push the commit to our repository and switch to the `actions` tab to see the running workflow.
 
 
+![run-failed](images/2.png)
+
+What's wrong? We see the `execute python script` step has failed. Why doesn't github see the script file that we just added?
+
+To fix this, we need to use the action which *uploads our repository's files to the remote machine that runs our script*. Let's modify our `main.yml` file in order to fix this:
+
+
+```yml
+
+name: A workflow for running tests on application
+on: push
+
+jobs: 
+  tests:
+    name: Unit tests
+    runs-on: macos-latest
+    steps:
+      
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: clone repository's files
+        uses: actions/checkout@v1
+
+      - name: execute python script
+        run: python test_sum.py
+
+```
+
+* We used action `actions/checkout@v1` in order *to clone our repository's files to the remote machine.* Now let's run our action again and see the result.
+
+
+
+
 
 
 
