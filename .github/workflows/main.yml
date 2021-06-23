@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: 3.8
       - name: execute python script
-        run: python test_sum.py
+        run: python test_sum.p

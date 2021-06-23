@@ -3,7 +3,7 @@
 The purpose of this article is to provide a handy and quick reference to general usage of **GitHub actions**, what it is and how one could implement them in their own project, as well as writing your own actions and customizing them. The customization will be illustrated by a simple example where we will automate testing in simple python script.
 
 # Table of contents
-* [What are GitHub actions?](#What-are-GitHub-actions?)
+* What are GitHub actions?
 * How to implement your own workflow
 * Where to look for references
 
@@ -48,13 +48,11 @@ jobs:
   tests:
     name: Unit tests
     runs-on: macos-latest
-    steps:
 
 ```
 
 * Here we created a job called tests. There are two names for it, on is for github (tests), and the other is for identifiying the action by the user in `actions` tab. You specify the second name with `name:` command.
 * The `runs-on` command specifies which operating system must be installed on the remote github machine that will run your application. Some possible options are: `ubuntu-latest`, `windows`, etc.
-* 
 
 5) Let's now add a simple python script `test_sum.py` to our repository.
 
@@ -73,7 +71,7 @@ test_sum()
 
 Imagine we want to run the script every time someone pushes to repository, for instance, we do now want any commits that do not pass the test.
 
-Let's edit our main.yml file so it now runs the script on each push:
+Let's edit our main.yml file by adding steps that execute commands.
 
 
 ```yml
@@ -98,6 +96,10 @@ jobs:
 * The `uses:` command here calls for another action. Think of it as some sort of a function call, and `with` are arguments that are passed.
 * Here you see that we first need install the python intepreter on a remote machine. For this we run *another action*, which is not part of our workflow. We simply use it, you can look for available actions [here](https://github.com/marketplace?type=actions).
 * Finally, we run out python script with `run` command.
+
+Now lets push the commit to our repository and switch to the `actions` tab to see the running workflow.
+
+
 
 
 
