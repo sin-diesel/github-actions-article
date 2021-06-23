@@ -1,0 +1,14 @@
+name: A workflow for running tests on application
+on: push
+
+jobs: 
+  tests:
+    name: Unit tests
+    runs-on: macos-latest
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: execute python script
+        run: python test_sum.py

@@ -28,66 +28,37 @@ A workflow in github actions is basically a list of commands that you write to s
 
 1) First, we create a `.github/workflows` directory in our git repository. You can do it in github or in your local repository, and then push it to remote github repo.
 2) Then we need to create `.yml` file in `.github/workflows`. This will contain all of the commands we are going to write. You can name it whatever you like, on our case, this will simply be `main.yml`
-3)
+3) Now let's write some code in `main.yml` file:
 
-Unfortunately, after completing first tutorials one might not get the idea on how to put the gained knowledge into practice. If you have trouble figuring it out, then the next section is exactly what you need.
-
-So, let's discuss everything step by step.
-
-***Any git repository's structure using actions should contain the following:***
-
-* A `.github` directory
-* A `workflows` directory inside `.github` directory
-* `.yml` file inside `workflows` directory
-
-At this point familarity with everything above is assumed, please refer to the educational links above to get acquainted with basic GitHub actions setup
-
-Now, let's discuss what every file does and how to configure them for out own needs.
-
-### .github/workflows/.yml file
-
-This file defines general settings for your workflow. A workflow in GitHub actions is a list of settings which define:
-* Name of the workflow (example: "Autotesting")
-* Workflow jobs. These are some sort of a functions in any program, aimed at performing some particular tasks.
-* Steps which should be performed in the job. Treat them simply as commands inside of a function (example: install python, echo "Hello world", etc)
-
-Let's create our main.yml file which sets our actions for automatic testing.
-
-**main.yml**
 ```yml
+name: A workflow for running tests on application
+on: push
+```
 
-name: A workflow for running tests on application # Name for our workflow
-on: push # Make it run whenever someone pushes to repository
+* `name:` is simply the name for our workflow which will be shown in github actions tab.
+* `on:` specifies *when* our workflow should run. Some options are, for instance: `push`,`pull-request` etc.
+
+4) Every workflow contains sections called `jobs`. A job can be veiewed as a function, and `steps` within the job are like instructions. Here we want to write a function that automatically runs tests, so we write a job called `tests`:
+
+```yml
+name: A workflow for running tests on application
+on: push
 
 jobs: 
   tests:
-    name: Unit tests action # Name of our build. For now let's stick only to single build
-    runs-on: macos-latest # State which OS should be used for running your action
-    steps: # Steps for the action
-      - uses: actions/checkout@v1 # This is mandatory action, it 
-                                  # is an action that checks out your
-                                  # repository and downloads it to the runner,
-                                  # allowing you to run actions against your code
-                                  # otherwise your repository will not be cloned to
-                                  # the remote machine running the action
-      - name: setup python # Install python interpreter on our machine # this is another step
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8 # Specify the version
-      - name: execute py script # Execute the script which containes python tests
-        run: python tests.py
+    name: Unit tests
+    runs-on: macos-latest
+    steps:
 
 ```
 
-Several things should be noted:
-* The `run` step is what actually we needed to add to our settings so we could run whatever we want remotely
-* In order to run, for example, python script, you first need to install an interpreter for it, likewise, you would need to do install many dependencies for your other applicatioins, like `cmake`
-for building `C++` projects, or `arm-none-eabi-gcc` for embedded development. For this you use actions already created by other GitHub users. You can find them [here](https://github.com/marketplace?type=actions) by typing in search field what should be installed in order for your action to run. In our case, we used `actions/setup-python@v2` action for installing python interpreter on the machine so it could run the tests script.
-* We specified the `tests.py` file that should be run, therefore, it must exist inside the repository.
+* Here we created a job called tests. There are two names for it, on is for github (tests), and the other is for identifiying the action by the user in `actions` tab. You specify the second name with `name:` command.
+* The `runs-on` command specifies which operating system must be installed on the remote github machine that will run your application. Some possible options are: `ubuntu-latest`, `windows`, etc.
+* 
 
-### Running the action
+5) Let's now add a simple python script `test_sum.py` to our repository.
 
-Now lets create the test.py file which contains the following:
+`test_sum.py`
 
 ```python
 
@@ -100,4 +71,33 @@ test_sum()
 
 ```
 
-Now we are going to commit the file and upload it to github repo.
+Imagine we want to run the script every time someone pushes to repository, for instance, we do now want any commits that do not pass the test.
+
+Let's edit our main.yml file so it now runs the script on each push:
+
+
+```yml
+name: A workflow for running tests on application
+on: push
+
+jobs: 
+  tests:
+    name: Unit tests
+    runs-on: macos-latest
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: execute python script
+        run: python test_sum.py
+
+```
+
+* Notice that each step has its name. This is optional, but it is much easier to see what steps are being run on a remote machine in actions tab. It is also easier to find errors when some of the steps fail, you will be able to see which step exatcly failed to perform and identify it by its name.
+* The `uses:` command here calls for another action. Think of it as some sort of a function call, and `with` are arguments that are passed.
+* Here you see that we first need install the python intepreter on a remote machine. For this we run *another action*, which is not part of our workflow. We simply use it, you can look for available actions [here](https://github.com/marketplace?type=actions).
+* Finally, we run out python script with `run` command.
+
+
+
