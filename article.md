@@ -158,9 +158,8 @@ Commit the changes and see the result:
 
 Now that you have learned the basics of github actions, you can continue to dig deeper into the topic. Several resources will definitely help you with that:
 * [This is a link](https://lab.github.com/githubtraining/github-actions:-hello-world) to github hosted course that covers many aspects of github actions, containers and other stuff.
-*
-*
-*
+* An almost perfect [youtube tutorial](https://www.youtube.com/watch?v=Yg5rpke79X4&t=506s) (in russian)
+* Official github actions [documentation](https://docs.github.com/en/actions)
 
 
 
