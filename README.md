@@ -3,9 +3,9 @@
 The purpose of this article is to provide a handy and quick reference to general usage of *GitHub actions*, what it is and how one could implement them in their own project, as well as writing your own actions and customizing them. The customization will be illustrated by a simple example where we will automate testing in simple python script.
 
 # Table of contents
-* [How are GitHub actions used?](#how-are-github-actions-used?)
+* [How are GitHub actions used?](#how-are-github-actions-used)
 * [How to implement your own workflow](#how-to-implement-your-own-workflow)
-* [Where to look for references](#where-to-look-for-references?)
+* [Where to look for references](#where-to-look-for-references)
 
 # How are GitHub actions used?
 
