@@ -1,6 +1,6 @@
 # About
 
-The purpose of this article is to provide a handy and quick reference to general usage of *GitHub actions*, what it is and how one could implement them in their own project, as well as writing your own actions and customizing them. The customization will be illustrated by a simple example where we will automate testing in simple python script.
+The purpose of this article is to provide a handy and quick reference to general usage of **GitHub actions**, what it is and how one could implement them in their own project, as well as writing your own actions and customizing them. The customization will be illustrated by a simple example where we will automate testing in simple python script.
 
 # Table of contents
 * [How are GitHub actions used?](#how-are-github-actions-used)
@@ -11,12 +11,12 @@ The purpose of this article is to provide a handy and quick reference to general
 
 Even if you are experienced git user who knows tons of git workflows and best practices, you still might not even heard of some amazing features the GitHub platform itself has to offer. GitHub actions is one such thing.
 
-Basically *GitHub actions* is a feature which allows to configure your repository to automatically do some stuff depending on setting that you specify.
+Basically GitHub actions is a feature which allows to configure your repository to automatically do some stuff depending on setting that you specify.
 
-Is runs them on a *remote machine* on GitHub server. You write configuration files with instructions for a remote machine that will run your application. Here are some of the stuff you can define:
+Is runs them on a **remote machine** on GitHub server. You write configuration files with instructions for a remote machine that will run your application. Here are some of the stuff you can define:
 
-* The *operating system* of the *runner* (here and after the *runner* is the remote machine running our commands)
-* The *actions* which triggers the workflow (a set of commands) to run 
+* The **operating system** of the **runner** (here and after the **runner** is the remote machine running our commands)
+* The **actions** which triggers the workflow (a set of commands) to run 
 * Steps, or commands that are run, which may include:
   * Any windows/unix commands
   * Other programs
@@ -34,8 +34,9 @@ We will now move on to writing your own workflow.
 
 # How to implement your own workflow
 
-A workflow in github actions is basically a list of commands that you write to set up the remote machine on github to run in the way you want to. 
+A workflow in github actions is basically a list of commands that get executed on a remote machine. 
 
+Let's begin configuring our own runner.
 
 1) First, we create a `.github/workflows` directory in our git repository. You can do it in github or in your local repository, and then push it to remote github repo.
 2) Then we need to create `.yml` file in `.github/workflows`. This will contain all of the commands we are going to write. You can name it whatever you like, on our case, this will simply be `main.yml`
@@ -47,7 +48,11 @@ on: push
 ```
 
 * `name:` is simply the name for our workflow which will be shown in github actions tab.
-* `on:` specifies *when* our workflow should run. Some options are, for instance: `push`,`pull-request` etc.
+* `on:` specifies *when* our workflow should run. Some options are, for instance: `push`,`pull-request`, `fork`, `commit_comment` etc.
+
+> **Note:**
+> You can trigger github to help you with command completions. Press `ctrl+space`
+> in order to activate autocompletion when editing your file on github.
 
 4) Every workflow contains sections called `jobs`. A job can be veiewed as a function, and `steps` within the job are like instructions. Here we want to write a function that automatically runs tests, so we write a job called `tests`:
 
@@ -62,8 +67,10 @@ jobs:
 
 ```
 
-* Here we created a job called tests. There are two names for it, on is for github (tests), and the other is for identifiying the action by the user in `actions` tab. You specify the second name with `name:` command.
-* The `runs-on` command specifies which operating system must be installed on the remote github machine that will run your application. Some possible options are: `ubuntu-latest`, `windows`, etc.
+> Note the `.yml` syntax and the spaces. Each new block must be two spaces away from the previous one.
+
+* Here we created a **job** called tests. Then we create a *sub-job* called `Unit tests`. Subjobs are mostly a small list of commands dedicated to performing single task.
+* The `runs-on` command specifies which operating system must be installed on the remote github machine that will run your application. Some possible options are: `ubuntu-latest`, `windows`, etc. Again, you can search for the options yourself either by editing the file on github or by searching through [documentation][documentation]
 
 5) Let's now add a simple python script `test_sum.py` to our repository.
 
@@ -171,6 +178,9 @@ Now that you have learned the basics of github actions, you can continue to dig 
 * [This is a link](https://lab.github.com/githubtraining/github-actions:-hello-world) to github hosted course that covers many aspects of github actions, containers and other stuff.
 * An almost perfect [youtube tutorial](https://www.youtube.com/watch?v=Yg5rpke79X4&t=506s) (in russian)
 * Official github actions [documentation](https://docs.github.com/en/actions)
+
+
+[documentation]: https://docs.github.com/en/actions
 
 
 
