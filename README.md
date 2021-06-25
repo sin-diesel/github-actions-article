@@ -3,11 +3,11 @@
 The purpose of this article is to provide a handy and quick reference to general usage of *GitHub actions*, what it is and how one could implement them in their own project, as well as writing your own actions and customizing them. The customization will be illustrated by a simple example where we will automate testing in simple python script.
 
 # Table of contents
-* [How are GitHub actions used?](##how-are-github-actions-used?)
-* [How to implement your own workflow]
-* [Where to look for references]
+* [How are GitHub actions used?](#how-are-github-actions-used?)
+* [How to implement your own workflow](#how-to-implement-your-own-workflow)
+* [Where to look for references](#where-to-look-for-references?)
 
-## How are GitHub actions used?
+# How are GitHub actions used?
 
 Even if you are experienced git user who knows tons of git workflows and best practices, you still might not even heard of some amazing features the GitHub platform itself has to offer. GitHub action is one such thing.
 
@@ -21,7 +21,7 @@ By navigation to `actions` tab in your github repository you will see the follow
 
 We will now move on to writing your own workflow.
 
-## How to implement your own workflow
+# How to implement your own workflow
 
 A workflow in github actions is basically a list of commands that you write to set up the remote machine on github to run in the way you want to. 
 
@@ -154,7 +154,7 @@ Commit the changes and see the result:
 
 ![run-failed-again](images/4.png)
 
-## Where to look for references
+# Where to look for references
 
 Now that you have learned the basics of github actions, you can continue to dig deeper into the topic. Several resources will definitely help you with that:
 * [This is a link](https://lab.github.com/githubtraining/github-actions:-hello-world) to github hosted course that covers many aspects of github actions, containers and other stuff.
